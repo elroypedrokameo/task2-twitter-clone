@@ -2,7 +2,7 @@
   <div class="tweet-card">
     <div>
       <form class="form-tweet" action="submit" @submit.prevent="handleSubmit()">
-        <textarea @input="characterCheck()" v-model="text" class="input-tweet" placeholder="Write something" name="" id="" cols="30" rows="10"></textarea>
+        <textarea @input="characterCheck()" ref="input" v-model="text" class="input-tweet" placeholder="Write something" name="" id="" cols="30" rows="10"></textarea>
         <div class="character-button">
           <p class="character">{{countCharacters()}}/{{ maxChar }}</p>
           <Button :disabled="isDisabled" :class="[isDisabled ? secondary : primary]"/>
@@ -16,6 +16,10 @@
 import Button from '../Button/Button.vue'
 
 export default {
+  mounted() {
+    this.$refs.input.focus();
+  },
+
   data() {
     return {
       text: '',
@@ -26,13 +30,16 @@ export default {
       captions: []
     }
   },
+
   components: {
     Button
   },
+
   methods: {
     countCharacters() {
       return this.text.length
     },
+
     characterCheck() {
       if (this.text.length > this.maxChar) {
         this.isDisabled = true
@@ -40,6 +47,7 @@ export default {
         this.isDisabled = false;
       }
     },
+
     handleSubmit() {
       this.captions.push(this.text)
       console.log('Tweet', this.text)

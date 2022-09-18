@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .container {
     width: 50rem;
     height: 5rem;
