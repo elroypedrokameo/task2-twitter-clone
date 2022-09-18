@@ -1,5 +1,6 @@
 <script>
   import Navbar from './components/Navbar/Navbar.vue';
+  import TweetForm from './components/Tweet Form/TweetForm.vue'
 
   export default {
     provide() {
@@ -10,7 +11,8 @@
       }
     },
     components: {
-      Navbar
+      Navbar,
+      TweetForm
     }
   }
 </script>
@@ -18,6 +20,7 @@
 <template>
   <div class="main">
     <Navbar />
+    <TweetForm />
   </div>
 </template>
 
