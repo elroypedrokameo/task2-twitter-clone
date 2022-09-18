@@ -8,7 +8,7 @@
         <h3>{{ fullname }}</h3>
         <p>@{{ username }}</p>
       </div>
-      <Avatar :avatar="avatar" />
+      <Avatar :width="`50px`" :style="{ width: width + 'px', height: height + 'px' }" :avatar="avatar" />
     </div>
   </div>
 </template>
@@ -17,6 +17,12 @@
   import Avatar from './Avatar.vue'
 
 export default {
+  data() {
+    return {
+      width: 50,
+      height: 50
+    }
+  },
   inject: ['fullname', 'username', 'avatar'],
   components: {
     Avatar

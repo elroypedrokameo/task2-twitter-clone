@@ -1,19 +1,19 @@
 <template>
-  <img :src="avatar" alt="">
+  <img :src="avatar" :style="{ width: width, height: height }" alt="">
 </template>
 
 <script>
 export default {
   props: {
-    avatar: String
+    avatar: String,
+    width: String,
+    height: String
   }
 }
 </script>
 
 <style scoped>
   img {
-    width: 50px;
-    height: 50px;
     border-radius: 50%;
   }
 </style>

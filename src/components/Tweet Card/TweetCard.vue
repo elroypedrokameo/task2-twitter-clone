@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <h2>Feeds</h2>
     <Tweet
       v-for="feed in feeds"
       :key="feed.id"
@@ -20,25 +21,29 @@
             id: 1,
             fullname: 'Elroy Pedro Kameo',
             username: 'elroy',
-            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu consequat ac felis donec et odio pellentesque diam. At erat pellentesque adipiscing commodo elit at imperdiet dui. Netus et malesuada fames ac turpis egestas integer eget aliquet. Cras ornare arcu dui vivamus arcu felis.'
+            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu consequat ac felis donec et odio pellentesque diam. At erat pellentesque adipiscing commodo elit at imperdiet dui. Netus et malesuada fames ac turpis egestas integer eget aliquet. Cras ornare arcu dui vivamus arcu felis.',
+            likes: 0,
           },
           {
             id: 2,
             fullname: 'John Doe',
             username: 'john',
-            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu consequat ac felis donec et odio pellentesque diam. At erat pellentesque adipiscing commodo elit at imperdiet dui. Netus et malesuada fames ac turpis egestas integer eget aliquet. Cras ornare arcu dui vivamus arcu felis.'
+            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu consequat ac felis donec et odio pellentesque diam. At erat pellentesque adipiscing commodo elit at imperdiet dui. Netus et malesuada fames ac turpis egestas integer eget aliquet. Cras ornare arcu dui vivamus arcu felis.',
+            likes: 0,
           },
           {
             id: 3,
             fullname: 'Marcus Rashford',
             username: 'rashford',
-            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu consequat ac felis donec et odio pellentesque diam. At erat pellentesque adipiscing commodo elit at imperdiet dui. Netus et malesuada fames ac turpis egestas integer eget aliquet. Cras ornare arcu dui vivamus arcu felis.'
+            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu consequat ac felis donec et odio pellentesque diam. At erat pellentesque adipiscing commodo elit at imperdiet dui. Netus et malesuada fames ac turpis egestas integer eget aliquet. Cras ornare arcu dui vivamus arcu felis.',
+            likes: 0,
           },
           {
             id: 4,
             fullname: 'Bruno Fernandes',
             username: 'rashford',
-            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu consequat ac felis donec et odio pellentesque diam. At erat pellentesque adipiscing commodo elit at imperdiet dui. Netus et malesuada fames ac turpis egestas integer eget aliquet. Cras ornare arcu dui vivamus arcu felis.'
+            caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu consequat ac felis donec et odio pellentesque diam. At erat pellentesque adipiscing commodo elit at imperdiet dui. Netus et malesuada fames ac turpis egestas integer eget aliquet. Cras ornare arcu dui vivamus arcu felis.',
+            likes: 0,
           }
         ]
       }

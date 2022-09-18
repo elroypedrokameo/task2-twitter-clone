@@ -9,30 +9,49 @@
         </div>
       </form>
     </div>
+    <!-- <div class="user-tweet">
+      <Tweet
+        v-for="caption in captions"
+        :key="caption.id"
+        :username="caption.caption"
+        :caption="caption.caption"
+        :fullname="caption.fullname"
+      />
+    </div> -->
   </div>
 </template>
 
 <script>
 import Button from '../Button/Button.vue'
+import Tweet from '../Tweet Card/Tweet.vue'
 
 export default {
   mounted() {
     this.$refs.input.focus();
+    console.log('Caption', this.captions)
   },
 
   data() {
     return {
       text: '',
-      maxChar: 10,
+      maxChar: 30,
       isDisabled: false,
       primary: 'primary',
       secondary: "secondary",
-      captions: []
+      captions: [
+        {
+          id: '',
+          fullname: '',
+          username: '',
+          caption: '',
+        },
+      ]
     }
   },
 
   components: {
-    Button
+    Button,
+    Tweet
   },
 
   methods: {
@@ -49,8 +68,13 @@ export default {
     },
 
     handleSubmit() {
-      this.captions.push(this.text)
-      console.log('Tweet', this.text)
+      this.captions.push({
+        id: this.captions.length + 1,
+        fullname: 'Elroy Pedro Kameo',
+        username: 'elroy',
+        caption: this.text
+      })
+      console.log('Hasil Submit', this.captions)
     }
   }
 }
@@ -100,5 +124,9 @@ export default {
 
   .character {
     margin-top: -2px;
+  }
+
+  .user-tweet {
+    margin: 30rem;
   }
 </style>

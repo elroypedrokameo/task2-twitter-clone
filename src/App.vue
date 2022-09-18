@@ -24,7 +24,6 @@
     <Navbar />
     <TweetForm />
     <div>
-      <h2 class="feeds">Feeds</h2>
       <TweetCard />
     </div>
   </div>
@@ -36,5 +35,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .feeds {
+    margin-top: 20px;
   }
 </style>
