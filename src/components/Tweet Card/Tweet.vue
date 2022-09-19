@@ -23,7 +23,9 @@
     props: {
       fullname: String,
       username: String,
-      caption: String
+      caption: String,
+      // likes: Number,
+      // retweets: Number
     },
     methods: {
       handleLikes() {
@@ -57,7 +59,9 @@
     </form>
     <div class="user-action">
       <Like @click="handleLikes()" :likes="likes" :class="[liked ? 'primary' : '']" />
+      <!-- <p>{{ likes }}</p> -->
       <RetweetIcon @click="handleRetweets()" :retweets="retweets" />
+      <!-- <p>{{ retweets }}</p> -->
     </div>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div class="tweet-card">
     <div>
-      <form class="form-tweet" action="submit" @submit.prevent="handleSubmit()">
+      <form class="form-tweet" action="submit" ref="form" @submit.prevent="handleSubmit()">
         <textarea @input="characterCheck()" ref="input" v-model="text" class="input-tweet" placeholder="Write something" name="" id="" cols="30" rows="10"></textarea>
         <div class="character-button">
           <p class="character">{{countCharacters()}}/{{ maxChar }}</p>
@@ -68,13 +68,18 @@ export default {
     },
 
     handleSubmit() {
-      this.captions.push({
-        id: this.captions.length + 1,
-        fullname: 'Elroy Pedro Kameo',
-        username: 'elroy',
-        caption: this.text
-      })
-      console.log('Hasil Submit', this.captions)
+      if(this.text === '') {
+        alert('Anda belum menulis sesuatu!')
+      } else {
+        this.captions.push({
+          id: this.captions.length,
+          fullname: 'Elroy Pedro Kameo',
+          username: 'elroy',
+          caption: this.text
+        })
+        this.$refs.form.reset()
+        console.log('Hasil Submit', this.captions)
+      }
     }
   }
 }
