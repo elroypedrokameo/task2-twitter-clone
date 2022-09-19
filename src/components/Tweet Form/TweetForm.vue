@@ -78,7 +78,7 @@ export default {
           caption: this.text
         })
         this.$refs.form.reset()
-        console.log('Hasil Submit', this.captions)
+        // console.log('Hasil Submit', this.captions)
       }
     }
   }
