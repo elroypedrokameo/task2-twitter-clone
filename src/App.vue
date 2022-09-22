@@ -24,6 +24,7 @@
     <Navbar />
     <TweetForm />
     <div>
+      <h2>Feeds</h2>
       <TweetCard />
     </div>
   </div>

@@ -59,7 +59,7 @@
     </form>
     <div class="user-action">
       <Like @click="handleLikes()" :likes="likes" :class="[liked ? 'primary' : '']" />
-      <!-- <p>{{ likes }}</p> -->
+      <!-- <p @click="">{{ likes }}</p> -->
       <RetweetIcon @click="handleRetweets()" :retweets="retweets" />
       <!-- <p>{{ retweets }}</p> -->
     </div>

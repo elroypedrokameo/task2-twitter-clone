@@ -9,15 +9,6 @@
         </div>
       </form>
     </div>
-    <!-- <div class="user-tweet">
-      <Tweet
-        v-for="caption in captions"
-        :key="caption.id"
-        :username="caption.caption"
-        :caption="caption.caption"
-        :fullname="caption.fullname"
-      />
-    </div> -->
   </div>
 </template>
 
@@ -40,10 +31,10 @@ export default {
       secondary: "secondary",
       captions: [
         {
-          id: '',
-          fullname: '',
-          username: '',
-          caption: '',
+          id: null,
+          fullname: null,
+          username: null,
+          caption: null,
         },
       ]
     }
@@ -78,7 +69,8 @@ export default {
           caption: this.text
         })
         this.$refs.form.reset()
-        // console.log('Hasil Submit', this.captions)
+        this.text = ''
+        console.log('Hasil Submit', this.captions)
       }
     }
   }
