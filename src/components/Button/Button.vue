@@ -17,7 +17,7 @@ export default {
   }
 
   .primary {
-    background-color: #00bd7e;
+    background-color: #645CAA;
   }
 
   .secondary {

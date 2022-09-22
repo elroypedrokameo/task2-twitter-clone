@@ -1,10 +1,26 @@
 <template>
   <div class="tweet-card">
     <div>
-      <form class="form-tweet" action="submit" ref="form" @submit.prevent="handleSubmit()">
-        <textarea @input="characterCheck()" ref="input" v-model="text" class="input-tweet" placeholder="Write something" name="" id="" cols="30" rows="10"></textarea>
+      <form
+        class="form-tweet"
+        action="submit"
+        ref="form"
+        v-on:submit.prevent="$emit('addFeeds')"
+      >
+        <textarea
+          :value="text"
+          ref="input"
+          @input="$emit('update:modelValue', $event.target.value)"
+          class="input-tweet"
+          placeholder="Write something"
+          name=""
+          id=""
+          cols="30"
+          rows="10"
+        >
+        </textarea>
         <div class="character-button">
-          <p class="character">{{countCharacters()}}/{{ maxChar }}</p>
+          <p class="character">{{ text.length }}/{{ maxCharacter }}</p>
           <Button :disabled="isDisabled" :class="[isDisabled ? secondary : primary]"/>
         </div>
       </form>
@@ -23,19 +39,27 @@ export default {
 
   data() {
     return {
-      text: '',
-      maxChar: 30,
-      isDisabled: false,
       primary: 'primary',
-      secondary: "secondary",
-      captions: [
-        {
-          id: null,
-          fullname: null,
-          username: null,
-          caption: null,
-        },
-      ]
+      secondary: 'secondary',
+    }
+  },
+  props: {
+    input: {
+      type: String,
+      required: true,
+    },
+    text: {
+      type: String,
+      default: 0
+    },
+    maxCharacter: {
+      type: Number,
+      default: 20
+    }
+  },
+  computed: {
+    isDisabled() {
+      return this.text.length > this.maxCharacter
     }
   },
 
@@ -43,48 +67,30 @@ export default {
     Button
   },
 
+  mounted() {
+    this.$refs.input.focus()
+  },
   methods: {
-    countCharacters() {
+    countChar() {
       return this.text.length
     },
-
-    characterCheck() {
-      if (this.text.length > this.maxChar) {
-        this.isDisabled = true
-      } else {
-        this.isDisabled = false;
-      }
-    },
-
-    handleSubmit() {
-      if(this.text === '') {
-        alert('Anda belum menulis sesuatu!')
-      } else {
-        this.captions.push({
-          id: this.captions.length,
-          fullname: 'Elroy Pedro Kameo',
-          username: 'elroy',
-          caption: this.text
-        })
-        this.$refs.form.reset()
-        this.text = ''
-        console.log('Hasil Submit', this.captions)
-      }
-    }
   }
 }
 </script>
 
 <style scoped>
   .tweet-card {
-    border: solid 1px black;
-    border-radius: 0px 0px 10px 10px;;
+    /* border: solid 1px black; */
+    background-color: #BFACE0;
+    border-radius: 10px;;
     width: 52.4rem;
     height: 9rem;
+    margin-top: 20px;
+    padding: 15px 0 0 0;
   }
 
   .primary {
-    background-color: #00bd7e;
+    background-color: #645CAA;
   }
 
   .secondary {
