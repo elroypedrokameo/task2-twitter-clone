@@ -14,7 +14,6 @@
 
 <script>
 import Button from '../Button/Button.vue'
-import Tweet from '../Tweet Card/Tweet.vue'
 
 export default {
   mounted() {
@@ -41,8 +40,7 @@ export default {
   },
 
   components: {
-    Button,
-    Tweet
+    Button
   },
 
   methods: {
