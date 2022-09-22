@@ -2,12 +2,17 @@
   import Navbar from './components/Navbar/Navbar.vue';
 
   export default {
-    provide() {
+    data() {
       return {
-        fullname: 'Elroy Pedro Kameo',
-        username: 'elroy',
-        avatar: 'https://awsimages.detik.net.id/community/media/visual/2019/02/19/42393387-9c5c-4be4-97b8-49260708719e.jpeg?w=750&q=90'
+        user: {
+          fullname: 'Elroy Pedro Kameo',
+          username: 'elroykameo',
+          avatar: 'https://img.nimo.tv/t/201910061570391243203_1629512473223_avatar.png/w180_l0/img.png'
+        }
       }
+    },
+    provide() {
+      return this.user
     },
     components: {
       Navbar
