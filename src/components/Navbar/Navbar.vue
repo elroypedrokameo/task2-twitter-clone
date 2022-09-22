@@ -36,7 +36,6 @@ export default {
   .container {
     width: 100%;
     height: 5rem;
-    margin: auto;
     padding: 10px 20px;
     background-color: #BFACE0;
     display: flex;

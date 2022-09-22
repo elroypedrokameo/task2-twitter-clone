@@ -32,6 +32,11 @@
 import Button from '../Button/Button.vue'
 
 export default {
+  mounted() {
+    this.$refs.input.focus();
+    console.log('Caption', this.captions)
+  },
+
   data() {
     return {
       primary: 'primary',
@@ -57,6 +62,7 @@ export default {
       return this.text.length > this.maxCharacter
     }
   },
+
   components: {
     Button
   },
