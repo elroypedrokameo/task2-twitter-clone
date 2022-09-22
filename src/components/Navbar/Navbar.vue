@@ -1,14 +1,16 @@
 <template>
   <div class="container">
-    <div class="navbar-brand">
-      <h2>Twitter Clone</h2>
-    </div>
-    <div class="user">
-      <div>
-        <h3>{{ fullname }}</h3>
-        <p>@{{ username }}</p>
+    <div class="navbar">
+      <div class="navbar-brand">
+        <h2>Twitter Clone</h2>
       </div>
-      <Avatar :avatar="avatar" />
+      <div class="user">
+        <div>
+          <h3>{{ fullname }}</h3>
+          <p>@{{ username }}</p>
+        </div>
+        <Avatar :width="`50px`" :style="{ width: width + 'px', height: height + 'px' }" :avatar="avatar" />
+      </div>
     </div>
   </div>
 </template>
@@ -17,6 +19,12 @@
   import Avatar from './Avatar.vue'
 
 export default {
+  data() {
+    return {
+      width: 50,
+      height: 50
+    }
+  },
   inject: ['fullname', 'username', 'avatar'],
   components: {
     Avatar
@@ -24,16 +32,24 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .container {
-    width: 50rem;
+    width: 100%;
     height: 5rem;
     margin: auto;
     padding: 10px 20px;
-    background-color: rgb(94, 202, 202);
+    background-color: #BFACE0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .navbar {
+    width: 53rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-right: 40px;
   }
 
   .user {
