@@ -1,8 +1,8 @@
 <template>
   <div class="tweet-card">
     <div>
-      <form class="form-tweet" action="submit" @submit.prevent="handleSubmit()">
-        <textarea @input="characterCheck()" v-model="text" class="input-tweet" placeholder="Write something" name="" id="" cols="30" rows="10"></textarea>
+      <form class="form-tweet" action="submit" ref="form" @submit.prevent="handleSubmit()">
+        <textarea @input="characterCheck()" ref="input" v-model="text" class="input-tweet" placeholder="Write something" name="" id="" cols="30" rows="10"></textarea>
         <div class="character-button">
           <p class="character">{{countCharacters()}}/{{ maxChar }}</p>
           <Button :disabled="isDisabled" :class="[isDisabled ? secondary : primary]"/>
@@ -16,23 +16,38 @@
 import Button from '../Button/Button.vue'
 
 export default {
+  mounted() {
+    this.$refs.input.focus();
+    console.log('Caption', this.captions)
+  },
+
   data() {
     return {
       text: '',
-      maxChar: 10,
+      maxChar: 30,
       isDisabled: false,
       primary: 'primary',
       secondary: "secondary",
-      captions: []
+      captions: [
+        {
+          id: null,
+          fullname: null,
+          username: null,
+          caption: null,
+        },
+      ]
     }
   },
+
   components: {
     Button
   },
+
   methods: {
     countCharacters() {
       return this.text.length
     },
+
     characterCheck() {
       if (this.text.length > this.maxChar) {
         this.isDisabled = true
@@ -40,9 +55,21 @@ export default {
         this.isDisabled = false;
       }
     },
+
     handleSubmit() {
-      this.captions.push(this.text)
-      console.log('Tweet', this.text)
+      if(this.text === '') {
+        alert('Anda belum menulis sesuatu!')
+      } else {
+        this.captions.push({
+          id: this.captions.length,
+          fullname: 'Elroy Pedro Kameo',
+          username: 'elroy',
+          caption: this.text
+        })
+        this.$refs.form.reset()
+        this.text = ''
+        console.log('Hasil Submit', this.captions)
+      }
     }
   }
 }
@@ -92,5 +119,9 @@ export default {
 
   .character {
     margin-top: -2px;
+  }
+
+  .user-tweet {
+    margin: 30rem;
   }
 </style>
