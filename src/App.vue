@@ -1,18 +1,28 @@
 <template>
   <div class="main">
     <Navbar />
-    <!-- <TweetForm /> -->
-    <h2>Feeds</h2>
-    <TweetCard />
+    <TweetForm
+      v-on:addFeeds="handleSubmit()"
+      :text="this.text"
+      :maxCharacter="maxCharacter"
+      v-model="this.text"
+    />
+    <h2 class="feeds">Feeds</h2>
+    <TweetCard
+      v-for="feed in feeds"
+      :key="feed.id"
+      :feed="feed"
+      v-on:addComment="handleComment(feed.id)"
+      v-model="this.comment"
+    />
   </div>
 </template>
 
 <script>
-  import Navbar from './components/Navbar/Navbar.vue';
-  import TweetForm from './components/Tweet Form/TweetForm.vue'
-  import TweetCard from './components/Tweet Card/TweetCard.vue'
+  import Navbar from './components/Navbar/Navbar.vue'
 
   export default {
+    name: 'App',
     data() {
       return {
         user: {
@@ -23,6 +33,59 @@
         text: '',
         maxCharacter: 30,
         comment: '',
+      }
+    },
+    methods: {
+      handleSubmit() {
+        if(this.text.length === 0) {
+          alert('Masukkan caption terlebih dahulu!')
+        } else {
+          this.feeds.unshift({
+            id: this.feeds.length,
+            fullname: this.user.fullname,
+            username: this.user.username,
+            caption: this.text,
+            avatar: this.user.avatar,
+            likes: 0,
+            retweets: 0,
+            reply: [
+              {
+                id: null,
+                fullname: null,
+                username: null,
+                caption: null,
+                avatar: null,
+                likes: null,
+                retweets: null,
+              }
+            ]
+          })
+          this.text = ''
+          console.log("Feeds", this.feeds)
+        }
+      },
+
+      handleComment(id) {
+        if (this.comment.length === 0) {
+          alert('Masukkan komentar terlebih daulu!')
+        } else {
+          for(let i = 0; i < this.feeds.length; i++) {
+            if(this.feeds[i].id === id) {
+              this.feeds[i].reply.unshift({
+                id: this.feeds[i].reply.length + 1,
+                fullname: 'Elroy Pedro',
+                username: 'elroykameo',
+                caption: this.comment,
+                avatar: 'https://img.nimo.tv/t/201910061570391243203_1629512473223_avatar.png/w180_l0/img.png',
+                likes: 0,
+                retweets: 0,
+                reply: []
+              })
+              this.comment = ''
+              console.log("Comment", this.feeds[i])
+            }
+          }
+        }
       }
     },
     computed: {
@@ -107,11 +170,10 @@
       return this.user
     },
     components: {
-      Navbar,
-      TweetForm,
-      TweetCard
-    }
+      Navbar
+    },
   }
+
 </script>
 
 <style scoped>
