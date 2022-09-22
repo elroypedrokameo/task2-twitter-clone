@@ -28,9 +28,10 @@
 
 <style scoped>
   .main {
-    margin-top: -8px;
+    margin: -8px 0 0 -8px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #EEEEEE;
   }
 </style>
