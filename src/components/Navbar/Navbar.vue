@@ -48,7 +48,6 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-right: 40px;
   }
 
   .user {

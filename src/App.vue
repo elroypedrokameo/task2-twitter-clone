@@ -49,44 +49,12 @@
             likes: 0,
             retweets: 0,
             reply: [
-              {
-                id: null,
-                fullname: null,
-                username: null,
-                caption: null,
-                avatar: null,
-                likes: null,
-                retweets: null,
-              }
             ]
           })
           this.text = ''
           console.log("Feeds", this.feeds)
         }
       },
-
-      handleComment(id) {
-        if (this.comment.length === 0) {
-          alert('Masukkan komentar terlebih daulu!')
-        } else {
-          for(let i = 0; i < this.feeds.length; i++) {
-            if(this.feeds[i].id === id) {
-              this.feeds[i].reply.unshift({
-                id: this.feeds[i].reply.length + 1,
-                fullname: 'Elroy Pedro',
-                username: 'elroykameo',
-                caption: this.comment,
-                avatar: 'https://img.nimo.tv/t/201910061570391243203_1629512473223_avatar.png/w180_l0/img.png',
-                likes: 0,
-                retweets: 0,
-                reply: []
-              })
-              this.comment = ''
-              console.log("Comment", this.feeds[i])
-            }
-          }
-        }
-      }
     },
     computed: {
       feeds() {
@@ -152,15 +120,7 @@
             likes: 1000,
             retweets: 2,
             reply: [
-              {
-                id: null,
-                fullname: null,
-                username: null,
-                caption: null,
-                avatar: null,
-                likes: null,
-                retweets: null,
-              }
+              
             ]
           }
         ]
