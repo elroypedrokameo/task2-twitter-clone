@@ -15,13 +15,14 @@
           placeholder="Write something"
           name=""
           id=""
-          cols="30"
-          rows="10"
         >
         </textarea>
         <div class="character-button">
           <p class="character">{{ text.length }}/{{ maxCharacter }}</p>
-          <Button :disabled="isDisabled" :class="[isDisabled ? secondary : primary]"/>
+          <div>
+            <Button @click="$emit('closeForm')" v-if="btnCancel" title="Cancel" class="btn-cancel" />
+            <Button title="Tweet" :disabled="isDisabled" :class="[isDisabled ? secondary : primary]"/>
+          </div>
         </div>
       </form>
     </div>
@@ -32,11 +33,6 @@
 import Button from '../Button/Button.vue'
 
 export default {
-  mounted() {
-    this.$refs.input.focus();
-    console.log('Caption', this.captions)
-  },
-
   data() {
     return {
       primary: 'primary',
@@ -55,6 +51,10 @@ export default {
     maxCharacter: {
       type: Number,
       default: 20
+    },
+    btnCancel: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -62,7 +62,6 @@ export default {
       return this.text.length > this.maxCharacter
     }
   },
-
   components: {
     Button
   },
@@ -80,7 +79,6 @@ export default {
 
 <style scoped>
   .tweet-card {
-    /* border: solid 1px black; */
     background-color: #BFACE0;
     border-radius: 10px;;
     width: 52.4rem;
@@ -110,7 +108,7 @@ export default {
 
   .input-tweet {
     background-color: rgb(198, 255, 236);
-    width: 48rem;
+    width: 91%;
     height: 1rem;
     border: none;
     padding: 20px;
@@ -129,5 +127,11 @@ export default {
 
   .user-tweet {
     margin: 30rem;
+  }
+
+  .btn-cancel {
+    margin-right: 8px;
+    background-color: rgb(211, 57, 57);
+    color: white;
   }
 </style>
