@@ -1,10 +1,12 @@
 <template>
-  <button class="button" >Tweet</button>
+  <button class="button" >{{ title }}</button>
 </template>
 
 <script>
 export default {
-  
+  props: {
+    title: String
+  }
 }
 </script>
 
@@ -17,7 +19,7 @@ export default {
   }
 
   .primary {
-    background-color: #00bd7e;
+    background-color: #645CAA;
   }
 
   .secondary {
