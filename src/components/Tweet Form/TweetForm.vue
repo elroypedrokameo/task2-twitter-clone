@@ -40,10 +40,6 @@ export default {
     }
   },
   props: {
-    input: {
-      type: String,
-      required: true,
-    },
     text: {
       type: String,
       default: 0

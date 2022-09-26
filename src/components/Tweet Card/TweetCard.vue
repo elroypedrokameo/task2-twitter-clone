@@ -18,9 +18,9 @@
         </div>
       </div>
       <RetweetIcon v-on:updateRetweets="handleRetweet()" :retweets="this.retweet" />
-      <DeleteIcon />
+      <DeleteIcon @click="$emit('deleteFeed')" />
     </div>
-    <button class="btn-reply" @click="handleOnShowReply()" v-show="feed.reply">
+    <button v-if="isChild" class="btn-reply" @click="handleOnShowReply()" v-show="feed.reply">
       Reply
     </button>
     <!-- <form
@@ -50,7 +50,9 @@
         v-for="reply in feed.reply"
         :key="reply.id"
         :feed="reply"
+        :isChild="false"
         class="reply"
+        v-model="this.comment"
       />
     </div>
   </div>
@@ -73,7 +75,6 @@ export default {
       retweet: this.feed.retweets,
       comment: '',
       showCommentForm: false,
-      text: '',
       maxCharacter: 30,
     }
   },
@@ -82,14 +83,10 @@ export default {
       type: Object,
       required: true
     },
-    comment: {
-      type: String,
-      default: ''
-    },
-    form: {
-      type: String,
-      required: true
-    },
+    isChild: {
+      type: Boolean,
+      default: true
+    }
   },
   methods: {
     handleLike() {
@@ -107,28 +104,29 @@ export default {
 
     handleOnShowReply() {
       this.showCommentForm = !this.showCommentForm
-      console.log("Button Show Form", this.showCommentForm)
     },
 
-    handleComment(id) {
-      if (this.comment.length === 0) {
-        alert('Masukkan komentar terlebih daulu!')
-      } else {
+    handleComment() {
+      if(this.comment.length > 0) {
         this.feed.reply.unshift({
           id: this.feed.reply.length + 1,
-          avatar: 'https://img.nimo.tv/t/201910061570391243203_1629512473223_avatar.png/w180_l0/img.png',
           fullname: 'Elroy Pedro Kameo',
-          username: 'elroykameo',
+          username: 'elroypedrokameo',
+          avatar: 'https://img.nimo.tv/t/201910061570391243203_1629512473223_avatar.png/w180_l0/img.png',
           caption: this.comment,
           likes: 0,
           retweets: 0,
           reply: []
         })
         this.comment = ''
-        console.log("Comment", this.feed.reply)
-        this.showCommentForm = false
+        
+        console.log("Comment", this.feed)
+      } else {
+        alert('Please input your comment')
       }
-    }
+
+      this.handleOnShowReply()
+    },
   },
   computed: {
     hasReply() {
@@ -231,14 +229,14 @@ export default {
   .btn-reply {
     margin-top: 8px;
     padding: 5px;
-    width: 100%;
+    width: 47.4rem;
     border: none;
     border-radius: 20px;
     cursor: pointer;
   }
 
   .tweet-comment-form {
-    width: 45rem!important;
+    width: 47.4rem!important;
     background-color: #00bd7e!important;
   }
 </style>
