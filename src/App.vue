@@ -33,41 +33,7 @@
         text: '',
         maxCharacter: 30,
         comment: '',
-      }
-    },
-    methods: {
-      handleSubmit() {
-        if(this.text.length === 0) {
-          alert('Masukkan caption terlebih dahulu!')
-        } else {
-          this.feeds.unshift({
-            id: this.feeds.length + 1,
-            fullname: this.user.fullname,
-            username: this.user.username,
-            caption: this.text,
-            avatar: this.user.avatar,
-            likes: 0,
-            retweets: 0,
-            reply: []
-          })
-          this.text = ''
-          console.log("Feeds", this.feeds)
-        }
-      },
-
-    handleDeleteFeed(id) {
-      for(let i = 0; i < this.feeds.length; i++) {
-        if(this.feeds[i].id === id) {
-          this.feeds.splice(i, 1)
-        }
-      }
-      console.log("Hasil delete", this.feeds)
-    }
-  },
-
-  computed: {
-    feeds() {
-      return [
+        feeds: [
         {
           id: 1,
           fullname: 'Bruno Fernandes',
@@ -133,7 +99,35 @@
           ]
         }
       ]
-    }
+      }
+    },
+    methods: {
+      handleSubmit() {
+        if(this.text.length === 0) {
+          alert('Masukkan caption terlebih dahulu!')
+        } else {
+          this.feeds.unshift({
+            id: this.feeds.length + 1,
+            fullname: this.user.fullname,
+            username: this.user.username,
+            caption: this.text,
+            avatar: this.user.avatar,
+            likes: 0,
+            retweets: 0,
+            reply: []
+          })
+          this.text = ''
+          console.log("Feeds", this.feeds)
+        }
+      },
+
+    handleDeleteFeed(id) {
+      for(let i = 0; i < this.feeds.length; i++) {
+        if(this.feeds[i].id === id) {
+          this.feeds.splice(i, 1)
+        }
+      }
+    },
   },
 
   provide() {

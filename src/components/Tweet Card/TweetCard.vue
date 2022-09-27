@@ -18,22 +18,13 @@
         </div>
       </div>
       <RetweetIcon v-on:updateRetweets="handleRetweet()" :retweets="this.retweet" />
-      <DeleteIcon @click="$emit('deleteFeed')" />
+      <div v-show="this.user">
+        <DeleteIcon @click="$emit('deleteFeed')" />
+      </div>
     </div>
     <button v-if="isChild" class="btn-reply" @click="handleOnShowReply()" v-show="feed.reply">
       Reply
     </button>
-    <!-- <form
-      v-on:submit.prevent="$emit('addComment', id)"
-      class="reply-form"
-      action="submit"
-    >
-      <input
-        type="text"
-        placeholder="Reply"
-        @input="$emit('update:modelValue', $event.target.value)"
-      >
-    </form> -->
     <div  v-if="this.showCommentForm === true">
       <TweetForm
         :btnCancel="true"
@@ -51,6 +42,7 @@
         :key="reply.id"
         :feed="reply"
         :isChild="false"
+        @deleteFeed="handleDeleteComment(feed.reply.id)"
         class="reply"
         v-model="this.comment"
       />
@@ -76,6 +68,11 @@ export default {
       comment: '',
       showCommentForm: false,
       maxCharacter: 30,
+      user: {
+          fullname: 'Elroy Pedro Kameo',
+          username: 'elroykameo',
+          avatar: 'https://img.nimo.tv/t/201910061570391243203_1629512473223_avatar.png/w180_l0/img.png'
+        },
     }
   },
   props: {
@@ -110,9 +107,9 @@ export default {
       if(this.comment.length > 0) {
         this.feed.reply.unshift({
           id: this.feed.reply.length + 1,
-          fullname: 'Elroy Pedro Kameo',
-          username: 'elroypedrokameo',
-          avatar: 'https://img.nimo.tv/t/201910061570391243203_1629512473223_avatar.png/w180_l0/img.png',
+          fullname: this.user.fullname,
+          username: this.user.username,
+          avatar: this.user.avatar,
           caption: this.comment,
           likes: 0,
           retweets: 0,
@@ -127,6 +124,10 @@ export default {
 
       this.handleOnShowReply()
     },
+
+    handleDeleteComment(id) {
+      console.log("Delete Comment", this.feed.reply)
+    }
   },
   computed: {
     hasReply() {
