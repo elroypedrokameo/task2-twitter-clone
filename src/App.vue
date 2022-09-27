@@ -117,7 +117,7 @@
             reply: []
           })
           this.text = ''
-          console.log("Feeds", this.feeds)
+          // console.log("Feeds", this.feeds)
         }
       },
 

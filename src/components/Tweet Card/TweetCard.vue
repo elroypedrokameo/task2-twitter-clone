@@ -18,7 +18,7 @@
         </div>
       </div>
       <RetweetIcon v-on:updateRetweets="handleRetweet()" :retweets="this.retweet" />
-      <div v-show="this.user">
+      <div v-if="this.feed.username === this.user.username">
         <DeleteIcon @click="$emit('deleteFeed')" />
       </div>
     </div>
@@ -32,6 +32,7 @@
         :maxCharacter="maxCharacter"
         @closeForm="handleOnShowReply()"
         class="tweet-comment-form"
+        v-on:addFeeds="handleComment()"
         v-model="this.comment"
       />
     </div>
