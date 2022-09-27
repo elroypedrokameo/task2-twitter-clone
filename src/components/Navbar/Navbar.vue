@@ -5,7 +5,7 @@
         <h2>Twitter Clone</h2>
       </div>
       <div class="user">
-        <div>
+        <div class="username">
           <h3>{{ fullname }}</h3>
           <p>@{{ username }}</p>
         </div>
@@ -34,7 +34,7 @@ export default {
 
 <style scoped>
   .container {
-    width: 100%;
+    width: 100vw;
     height: 5rem;
     padding: 10px 20px;
     background-color: #BFACE0;
@@ -61,5 +61,9 @@ export default {
 
   .user  p {
     margin-top: -15px;
+  }
+
+  .username {
+    margin-right: 10px;
   }
 </style>

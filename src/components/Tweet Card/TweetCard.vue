@@ -18,22 +18,13 @@
         </div>
       </div>
       <RetweetIcon v-on:updateRetweets="handleRetweet()" :retweets="this.retweet" />
-      <DeleteIcon />
+      <div v-show="this.user">
+        <DeleteIcon @click="$emit('deleteFeed')" />
+      </div>
     </div>
-    <button class="btn-reply" @click="handleOnShowReply()" v-show="feed.reply">
+    <button v-if="isChild" class="btn-reply" @click="handleOnShowReply()" v-show="feed.reply">
       Reply
     </button>
-    <!-- <form
-      v-on:submit.prevent="$emit('addComment', id)"
-      class="reply-form"
-      action="submit"
-    >
-      <input
-        type="text"
-        placeholder="Reply"
-        @input="$emit('update:modelValue', $event.target.value)"
-      >
-    </form> -->
     <div  v-if="this.showCommentForm === true">
       <TweetForm
         :btnCancel="true"
@@ -50,7 +41,10 @@
         v-for="reply in feed.reply"
         :key="reply.id"
         :feed="reply"
+        :isChild="false"
+        @deleteFeed="handleDeleteComment(feed.reply.id)"
         class="reply"
+        v-model="this.comment"
       />
     </div>
   </div>
@@ -73,8 +67,12 @@ export default {
       retweet: this.feed.retweets,
       comment: '',
       showCommentForm: false,
-      text: '',
       maxCharacter: 30,
+      user: {
+          fullname: 'Elroy Pedro Kameo',
+          username: 'elroykameo',
+          avatar: 'https://img.nimo.tv/t/201910061570391243203_1629512473223_avatar.png/w180_l0/img.png'
+        },
     }
   },
   props: {
@@ -82,14 +80,10 @@ export default {
       type: Object,
       required: true
     },
-    comment: {
-      type: String,
-      default: ''
-    },
-    form: {
-      type: String,
-      required: true
-    },
+    isChild: {
+      type: Boolean,
+      default: true
+    }
   },
   methods: {
     handleLike() {
@@ -107,27 +101,32 @@ export default {
 
     handleOnShowReply() {
       this.showCommentForm = !this.showCommentForm
-      console.log("Button Show Form", this.showCommentForm)
     },
 
-    handleComment(id) {
-      if (this.comment.length === 0) {
-        alert('Masukkan komentar terlebih daulu!')
-      } else {
+    handleComment() {
+      if(this.comment.length > 0) {
         this.feed.reply.unshift({
           id: this.feed.reply.length + 1,
-          avatar: 'https://img.nimo.tv/t/201910061570391243203_1629512473223_avatar.png/w180_l0/img.png',
-          fullname: 'Elroy Pedro Kameo',
-          username: 'elroykameo',
+          fullname: this.user.fullname,
+          username: this.user.username,
+          avatar: this.user.avatar,
           caption: this.comment,
           likes: 0,
           retweets: 0,
           reply: []
         })
         this.comment = ''
-        console.log("Comment", this.feed.reply)
-        this.showCommentForm = false
+        
+        console.log("Comment", this.feed)
+      } else {
+        alert('Please input your comment')
       }
+
+      this.handleOnShowReply()
+    },
+
+    handleDeleteComment(id) {
+      console.log("Delete Comment", this.feed.reply)
     }
   },
   computed: {
@@ -231,14 +230,14 @@ export default {
   .btn-reply {
     margin-top: 8px;
     padding: 5px;
-    width: 100%;
+    width: 47.4rem;
     border: none;
     border-radius: 20px;
     cursor: pointer;
   }
 
   .tweet-comment-form {
-    width: 45rem!important;
+    width: 47.4rem!important;
     background-color: #00bd7e!important;
   }
 </style>
