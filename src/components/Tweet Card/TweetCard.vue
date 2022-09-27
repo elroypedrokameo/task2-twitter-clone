@@ -32,7 +32,6 @@
         :maxCharacter="maxCharacter"
         @closeForm="handleOnShowReply()"
         class="tweet-comment-form"
-        v-on:addFeeds="handleComment()"
         v-model="this.comment"
       />
     </div>
@@ -42,7 +41,7 @@
         :key="reply.id"
         :feed="reply"
         :isChild="false"
-        @deleteFeed="handleDeleteComment(feed.reply.id)"
+        @deleteFeed="handleDeleteComment(reply)"
         class="reply"
         v-model="this.comment"
       />
@@ -126,7 +125,12 @@ export default {
     },
 
     handleDeleteComment(id) {
-      console.log("Delete Comment", this.feed.reply)
+      // console.log("Delete Comment", this.feed.reply)
+      for(let i = 0; i < this.feed.reply.length; i++) {
+        if(this.feed.reply[i] === id) {
+          this.feed.reply.splice(i, 1)
+        }
+      }
     }
   },
   computed: {
