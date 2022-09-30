@@ -98,7 +98,7 @@
             
           ]
         }
-      ]
+        ]
       }
     },
     methods: {
@@ -117,7 +117,6 @@
             reply: []
           })
           this.text = ''
-          // console.log("Feeds", this.feeds)
         }
       },
 
